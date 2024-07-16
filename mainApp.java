@@ -305,27 +305,28 @@ public class mainApp  {
 					break;
 				case "2" :
 					//orders
-					int i = 0;
+					int i = 1;
 					System.out.println("You have chosen to review the Orders of products.");
 					if (Orders.size() > 0) {
 						System.out.println("Here are the ordered products:");
 						for (Order order : Orders) {
 							System.out.println("------------------------------------------");
-							System.out.println("Order " + i + ":");
+							System.out.println("Order " + i);
 							System.out.println("------------------------------------------");
 							System.out.println(order.toString());
 							System.out.println("------------------------------------------");
 							i++;
 						}
-						System.out.println("Choose a product between 0 and " + (Orders.size() - 1) + ":");
+						System.out.println("Choose a product between 1 and " + (Orders.size()) + ":");
 						int orderNumber = in.nextInt();
-						while (orderNumber >= Orders.size() || orderNumber < 0) {
+						while (orderNumber > Orders.size() || orderNumber <= 0) {
 							System.out.println("Wrong number.Enter the correct number again:");
 							orderNumber = in.nextInt();
 						}
 						in.nextLine();
+						orderNumber = orderNumber - 1;
 						System.out.println(Orders.get(orderNumber));
-						System.out.print("Would you like to buy this product?(Yes/no) : ");
+						System.out.print("Would you like to buy this product?(Yes/No) : ");
 						String option = Device.checkInput("Yes", "No", in.nextLine(), "Yes or No");
 						if (option.equalsIgnoreCase("Yes")) {
 							Sale newSale = new Sale(Orders.get(orderNumber).getName(), Orders.get(orderNumber).getPrice(), Orders.get(orderNumber).CustomerPhone, Orders.get(orderNumber).CustomerName, Orders.get(orderNumber).arriveDate);
