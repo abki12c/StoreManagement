@@ -22,9 +22,10 @@ public class Device {
     this.code=rand.nextInt(1000000);
   }
 
-  public  Device(String name,double price) {
+  public  Device(String name,double price, int productCode) {
     this.name = name;
     this.price = price;
+    this.code = productCode;
   }
 
   public  Device(){}
@@ -91,7 +92,7 @@ public class Device {
     return this.id;
   }
 
-  static String checkInput(String option1, String option2, String option3, String option4, String check, String InputType){
+  public static String checkInput(String option1, String option2, String option3, String option4, String check, String InputType){
     Scanner in = new Scanner(System.in);
     while(!check.equalsIgnoreCase(option1) && !check.equalsIgnoreCase(option2) && !check.equalsIgnoreCase(option3) && !check.equalsIgnoreCase(option4)){
       System.out.println("Wrong input.Enter again the "+ InputType+":");
@@ -100,7 +101,7 @@ public class Device {
     return check;
   }
 
-  static String checkInput(String option1, String option2, String option3, String check, String InputType){
+  public static String checkInput(String option1, String option2, String option3, String check, String InputType){
     Scanner in = new Scanner(System.in);
     while(!check.equalsIgnoreCase(option1) && !check.equalsIgnoreCase(option2) && !check.equalsIgnoreCase(option3)){
       System.out.println("Wrong input.Enter again the "+ InputType+":");
@@ -110,7 +111,7 @@ public class Device {
   }
 
 
-  static String checkInput(String option1, String option2,String check, String InputType){
+  public static String checkInput(String option1, String option2,String check, String InputType){
     Scanner in = new Scanner(System.in);
     while(!check.equalsIgnoreCase(option1) && !check.equalsIgnoreCase(option2)){
       System.out.println("Wrong input.Enter again the "+ InputType+":");

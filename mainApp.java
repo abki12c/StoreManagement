@@ -15,7 +15,9 @@ public class mainApp  {
 	static List<Order> Orders = new ArrayList<>();
 	static List<Sale> Sales = new ArrayList<>();
 
-	public static void createList(){
+	public static ArrayList<Device> createList(){
+
+		ArrayList<Device> products = new ArrayList<>();
 
 		TV tv1 = new TV("Panasonic G78",2007,"Samsung",99.99,"LED",32,"720p","DVI");
 		TV tv2 = new TV(" LG 43UM7100",2019,"LG",289.99,"LCD",38,"1080p","HDMI");
@@ -43,18 +45,20 @@ public class mainApp  {
 		washingMachine1.setPieces(2);
 		washingMachine2.setPieces(1);
 
-		AvailableProducts.add(tv1);
-		AvailableProducts.add(tv2);
-		AvailableProducts.add(player1);
-		AvailableProducts.add(player2);
-		AvailableProducts.add(ps4pro);
-		AvailableProducts.add(xbox);
-		AvailableProducts.add(camera1);
-		AvailableProducts.add(camera2);
-		AvailableProducts.add(fridge1);
-		AvailableProducts.add(fridge2);
-		AvailableProducts.add(washingMachine1);
-		AvailableProducts.add(washingMachine2);
+		products.add(tv1);
+		products.add(tv2);
+		products.add(player1);
+		products.add(player2);
+		products.add(ps4pro);
+		products.add(xbox);
+		products.add(camera1);
+		products.add(camera2);
+		products.add(fridge1);
+		products.add(fridge2);
+		products.add(washingMachine1);
+		products.add(washingMachine2);
+
+		return products;
 
 	}
 
@@ -93,6 +97,7 @@ public class mainApp  {
 		if(AvailableProducts.contains(device)){
 			int index = AvailableProducts.indexOf(device);
 			int pieces = AvailableProducts.get(index).getPieces();
+			device = AvailableProducts.get(index);
 
 			if(pieces>0){
 				index = AvailableProducts.indexOf(device);
@@ -113,7 +118,7 @@ public class mainApp  {
 					device.price = Math.round(device.price * 100.0) / 100.0;
 					System.out.println("Price after discount:"+ device.getPrice());
 
-					Sale toBeSold = new Sale(device.getName(),device.getPrice(),customerPhone,customerName,saleDate);
+					Sale toBeSold = new Sale(device.getName(),device.getPrice(),device.getCode(),customerPhone,customerName,saleDate);
 					Sales.add(toBeSold);
 
 					//reduce model pieces by one
@@ -137,7 +142,7 @@ public class mainApp  {
 				orderDate = in.nextLine();
 				System.out.print("\nEnter the arrive date: ");
 				arriveDate = in.nextLine();
-				Order toBeOrdered= new Order(device.getName(),device.getPrice(),customerPhone,customerName,orderDate,arriveDate);
+				Order toBeOrdered= new Order(device.getName(),device.getPrice(),device.getCode(),customerPhone,customerName,orderDate,arriveDate);
 				Orders.add(toBeOrdered);
 				System.out.println("Congratulations, the product has been ordered!");
 			}
@@ -150,8 +155,7 @@ public class mainApp  {
 		String type, opt,opt1,opt2,opt3;
 		Scanner in= new Scanner(System.in);
 
-		createList();
-		CreateFileApp.createFile();
+		CreateFileApp.createFile(createList());
 		AvailableProducts = ReadFileApp.readFile("products.txt");
 
 		System.out.println("Welcome to the App!");
@@ -333,7 +337,7 @@ public class mainApp  {
 							System.out.print("Would you like to buy this product? (Yes/No) : ");
 							String option = Device.checkInput("Yes", "No", in.nextLine(), "Yes or No");
 							if (option.equalsIgnoreCase("Yes")) {
-								Sale newSale = new Sale(Orders.get(orderNumber).getName(), Orders.get(orderNumber).getPrice(), Orders.get(orderNumber).CustomerPhone, Orders.get(orderNumber).CustomerName, Orders.get(orderNumber).arriveDate);
+								Sale newSale = new Sale(Orders.get(orderNumber).getName(), Orders.get(orderNumber).getPrice(), Orders.get(orderNumber).getCode(),Orders.get(orderNumber).CustomerPhone, Orders.get(orderNumber).CustomerName, Orders.get(orderNumber).getArriveDate());
 								Sales.add(newSale);
 								Orders.get(orderNumber).setStatus("COMPLETED");
 								System.out.println("Sale Successful!");

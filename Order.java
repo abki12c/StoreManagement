@@ -2,16 +2,17 @@ public class Order extends SaleOrder {
 	//variables
 	private String status;
 	public static int codes = 0;
-	public String orderDate;
-	public String arriveDate;
+	private String orderDate;
+	private String arriveDate;
+	private int orderCode;
 
 	//constructor
-	public Order(String name,double price,int phone, String customerName,String orderDate,String arriveDate) {
-		super(name,price,phone,customerName);
+	public Order(String name,double price, int productCode,int phone, String customerName,String orderDate,String arriveDate) {
+		super(name,price,productCode,phone,customerName);
 		this.orderDate = orderDate;
 		this.arriveDate =  arriveDate;
 		this.setStatus("EXPECTED");
-		this.code=nextCode();
+		this.orderCode=nextCode();
 	}
 
 	public void setStatus(String status) {
@@ -36,9 +37,12 @@ public class Order extends SaleOrder {
 	public String getStatus() {
 		return this.status;
 	}
+	public int getOrderCode() {
+		return orderCode;
+	}
 
 	@Override
 	public String toString() {
-		return "Product Name: "+this.getName()+ "\n" + "Code: " + this.getCode()+ "\n" + "Price: "+this.getPrice()+"$"+ "\n" + "Order date: "+this.getOrderDate()+ "\n" + "Arrival Date: "+this.getArriveDate() + "\n" + "Status: " + this.getStatus() ;
+		return "Product Name: "+this.getName()+ "\n" + "Order code: " + this.getOrderCode()+ "\n" + "Product code: " + super.getCode() +"\n" + "Price: "+this.getPrice()+"$"+ "\n" + "Order date: "+this.getOrderDate()+ "\n" + "Arrival Date: "+this.getArriveDate() + "\n" + "Status: " + this.getStatus() ;
 	}
 }

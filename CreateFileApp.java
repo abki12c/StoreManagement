@@ -1,16 +1,17 @@
 import java.io.*;
+import java.util.ArrayList;
 
 
 public class CreateFileApp {
 
 
 
-  public static void createFile() {
+  public static void createFile(ArrayList<Device> products) {
       FileWriter writer =null;
       try {
         writer = new FileWriter(new File("products.txt"));
         writer.write("ITEM_LIST" + "\n" + "{");
-        for (Device product : mainApp.AvailableProducts) {
+        for (Device product : products) {
           if (product instanceof TV) {
             writer.write("\n" + "ITEM" + "\n" + "\t" + "{" + "\n" + "\t" + "\t" + "Code : " + product.getCode() + "\n" + "\t" + "\t" + "ITEM_TYPE : TV" + "\n" + "\t" + "\t" + "MODEL: " + product.getName() + "\n" + "\t" + "\t" + "MANUFACTURER : " + product.getManufacturer() + "\n" + "\t" + "\t" + "YEAR : " + product.getYear() +
                     "\n" + "\t" + "\t" + "PRICE : " + product.getPrice() + "\n" + "\t" + "\t" + "TYPE : " + ((TV) product).getType() + "\n" + "\t" + "\t" + "INCHES : " + ((TV) product).getInches() + "\n" + "\t" + "\t" + "DISPLAY : " + ((TV) product).getDisplay() + "\n" + "\t" + "\t" + "PORTS : " + ((TV) product).getPorts() + "\n" + "\t" + "\t" + "PIECES : " + product.getPieces() + "\n" + "\t" + "}");

@@ -6,8 +6,8 @@ abstract public class SaleOrder extends Device {
 
 
     //constructor
-    public SaleOrder(String name, double price,int CustomerPhone, String CustomerName) {
-        super(name,price);
+    public SaleOrder(String name, double price, int productCode, int CustomerPhone, String CustomerName) {
+        super(name,price, productCode);
         this.CustomerPhone = CustomerPhone;
         this.CustomerName = CustomerName;
     }
