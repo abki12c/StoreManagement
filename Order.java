@@ -39,6 +39,6 @@ public class Order extends SaleOrder {
 
 	@Override
 	public String toString() {
-		return "Product Name: "+this.getName()+ "\n" + "Code: " + this.getCode()+ "\n" + "Price: "+this.getPrice()+"$"+ "\n" + "Order date: "+this.getOrderDate()+ "\n" + "Arrival Date: "+this.getArriveDate();
+		return "Product Name: "+this.getName()+ "\n" + "Code: " + this.getCode()+ "\n" + "Price: "+this.getPrice()+"$"+ "\n" + "Order date: "+this.getOrderDate()+ "\n" + "Arrival Date: "+this.getArriveDate() + "\n" + "Status: " + this.getStatus() ;
 	}
 }

@@ -326,13 +326,18 @@ public class mainApp  {
 						in.nextLine();
 						orderNumber = orderNumber - 1;
 						System.out.println(Orders.get(orderNumber));
-						System.out.print("Would you like to buy this product?(Yes/No) : ");
-						String option = Device.checkInput("Yes", "No", in.nextLine(), "Yes or No");
-						if (option.equalsIgnoreCase("Yes")) {
-							Sale newSale = new Sale(Orders.get(orderNumber).getName(), Orders.get(orderNumber).getPrice(), Orders.get(orderNumber).CustomerPhone, Orders.get(orderNumber).CustomerName, Orders.get(orderNumber).arriveDate);
-							Sales.add(newSale);
-							Orders.get(orderNumber).setStatus("ARRIVED");
-							System.out.println("Sale Successful!");
+
+						if(Orders.get(orderNumber).getStatus().equals("COMPLETED")){
+							System.out.println("This product order has already been completed, you cant buy it");
+						}else {
+							System.out.print("Would you like to buy this product? (Yes/No) : ");
+							String option = Device.checkInput("Yes", "No", in.nextLine(), "Yes or No");
+							if (option.equalsIgnoreCase("Yes")) {
+								Sale newSale = new Sale(Orders.get(orderNumber).getName(), Orders.get(orderNumber).getPrice(), Orders.get(orderNumber).CustomerPhone, Orders.get(orderNumber).CustomerName, Orders.get(orderNumber).arriveDate);
+								Sales.add(newSale);
+								Orders.get(orderNumber).setStatus("COMPLETED");
+								System.out.println("Sale Successful!");
+							}
 						}
 					} else {
 						System.out.println("There are no orders at the moment..");
@@ -347,7 +352,6 @@ public class mainApp  {
 						for (Sale sale : Sales) {
 							System.out.println("------------------------------------------");
 							System.out.println(sale);
-							System.out.println("------------------------------------------");
 
 						}
 					} else {

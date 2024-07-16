@@ -2,7 +2,7 @@ ITEM_LIST
 {
 ITEM
 	{
-		Code : 495599
+		Code : 908169
 		ITEM_TYPE : TV
 		MODEL: Panasonic G78
 		MANUFACTURER : Samsung
@@ -16,7 +16,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 144364
+		Code : 456683
 		ITEM_TYPE : TV
 		MODEL:  LG 43UM7100
 		MANUFACTURER : LG
@@ -30,7 +30,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 84949
+		Code : 556802
 		ITEM_TYPE : PLAYER
 		MODEL: Sony Blue Ray G5 
 		MANUFACTURER : Sony
@@ -43,7 +43,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 897473
+		Code : 138531
 		ITEM_TYPE : PLAYER
 		MODEL: Sony DVD Player H3 
 		MANUFACTURER : Sony
@@ -56,7 +56,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 391888
+		Code : 827418
 		ITEM_TYPE : CONSOLE
 		MODEL: Playstation 4 Pro
 		MANUFACTURER : Sony
@@ -71,7 +71,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 316777
+		Code : 995756
 		ITEM_TYPE : CONSOLE
 		MODEL: Xbox One
 		MANUFACTURER : Microsoft
@@ -86,7 +86,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 984724
+		Code : 895341
 		ITEM_TYPE : CAMERA
 		MODEL: DSLR D5300
 		MANUFACTURER : Nikon
@@ -101,7 +101,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 654490
+		Code : 721294
 		ITEM_TYPE : CAMERA
 		MODEL: Digital Camera Cybershot DSC-HX60B
 		MANUFACTURER : Sony
@@ -116,7 +116,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 893487
+		Code : 857115
 		ITEM_TYPE : FRIDGE
 		MODEL: CM 3352 W
 		MANUFACTURER : CANDY
@@ -130,7 +130,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 379989
+		Code : 572375
 		ITEM_TYPE : FRIDGE
 		MODEL: GBP 31 DSLZN
 		MANUFACTURER : LG
@@ -144,7 +144,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 760191
+		Code : 561761
 		ITEM_TYPE : WASHING MACHINE
 		MODEL: F4J5TN3W
 		MANUFACTURER : LG
@@ -157,7 +157,7 @@ ITEM
 	}
 ITEM
 	{
-		Code : 879109
+		Code : 826057
 		ITEM_TYPE : WASHING MACHINE
 		MODEL: FWSF61053W
 		MANUFACTURER : WHIRLPOOL
