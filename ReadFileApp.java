@@ -23,8 +23,8 @@ public class ReadFileApp {
 							Device device = new Device();
 							String itemType, type, energyClass,rpm,display,ports,resolution,format,cpu,gpu,sound ;
 							itemType=type=energyClass=rpm=display=ports=resolution=format=cpu=gpu=sound = "";
-							int pieces,megapixels,optZoom,inches,digitalZoom,screenSize;
-							pieces=megapixels=optZoom=inches=digitalZoom=screenSize=0;
+							int pieces,megapixels,optZoom,inches,digitalZoom,screenSize,code;
+							pieces=megapixels=optZoom=inches=digitalZoom=screenSize=code=0;
 							float storage,refrigeratorStorage,fridgeStorage;
 							storage=refrigeratorStorage=fridgeStorage=0;
 
@@ -34,7 +34,7 @@ public class ReadFileApp {
 								token = lineToken.nextToken().trim();
 								value = lineToken.nextToken().trim();
 								switch (token) {
-									case "CODE" -> device.setCode(Integer.parseInt(value));
+									case "CODE" -> code = Integer.parseInt(value);
 									case "ITEM_TYPE" -> itemType = value;
 									case "MODEL" -> device.setName(value);
 									case "MANUFACTURER" -> device.setManufacturer(value);
@@ -68,31 +68,37 @@ public class ReadFileApp {
 								case "WASHING MACHINE":
 									W_Machine washingMachine = new W_Machine(device.getName(),device.getYear(),device.getManufacturer(),device.getPrice(),energyClass,storage,Integer.parseInt(rpm));
 									washingMachine.setPieces(pieces);
+									washingMachine.setCode(code);
 									devices.add(washingMachine);
 									break;
 								case "CAMERA":
 									Camera camera = new Camera(device.getName(),device.getYear(),device.getManufacturer(),device.getPrice(),type,megapixels,optZoom,digitalZoom,screenSize);
 									camera.setPieces(pieces);
+									camera.setCode(code);
 									devices.add(camera);
 									break;
 								case "TV":
 									TV tv = new TV(device.getName(),device.getYear(),device.getManufacturer(),device.getPrice(),type,inches,display,ports);
 									tv.setPieces(pieces);
+									tv.setCode(code);
 									devices.add(tv);
 									break;
 								case "PLAYER":
 									Player player = new Player(device.getName(),device.getYear(),device.getManufacturer(),device.getPrice(),type,resolution,format);
 									player.setPieces(pieces);
+									player.setCode(code);
 									devices.add(player);
 									break;
 								case "CONSOLE":
 									Console console = new Console(device.getName(),device.getYear(),device.getManufacturer(),device.getPrice(),type,cpu,gpu,sound,storage);
 									console.setPieces(pieces);
+									console.setCode(code);
 									devices.add(console);
 									break;
 								case "FRIDGE":
 									Fridge fridge = new Fridge(device.getName(),device.getYear(),device.getManufacturer(),device.getPrice(),type,energyClass,refrigeratorStorage,fridgeStorage);
 									fridge.setPieces(pieces);
+									fridge.setCode(code);
 									devices.add(fridge);
 									break;
 							}
@@ -106,5 +112,74 @@ public class ReadFileApp {
 			System.out.println("Error reading line ...");
 		}
 		return devices;
+	}
+
+	public static void updatePieces(int productCode, String filename){
+		BufferedReader reader;
+		String line, token, value;
+		int pieces,code;
+		boolean productFound = false;
+		StringTokenizer lineToken;
+		try {
+			reader = new BufferedReader(new FileReader(new File(filename)));
+			StringBuffer buffer = new StringBuffer();
+
+			line = reader.readLine();
+			if (line.trim().startsWith("ITEM_LIST")) {
+				buffer.append(line).append("\n");
+				line = reader.readLine();
+				if (line.trim().equals("{")) {
+					buffer.append(line).append("\n");
+					line = reader.readLine();
+					while (line!=null && line.trim().equals("ITEM")) {
+						buffer.append(line).append("\n");
+						line = reader.readLine();
+						if (line.trim().equals("{")) {
+							buffer.append(line).append("\n");
+							line = reader.readLine();
+							while (!line.trim().equals("}")) {
+
+								lineToken = new StringTokenizer(line,":");
+								token = lineToken.nextToken().trim();
+
+								if(token.equals("CODE")){
+									value = lineToken.nextToken().trim();
+									code = Integer.parseInt(value);
+
+									if(code==productCode){
+										productFound = true;
+									}
+								}
+
+								if(productFound && token.equals("PIECES")){
+									value = lineToken.nextToken().trim();
+									pieces = Integer.parseInt(value);
+									pieces = pieces -1;
+									line = "		PIECES : " + pieces;
+									productFound = false;
+
+								}
+
+								buffer.append(line).append("\n");
+
+
+								line = reader.readLine();
+							}
+							buffer.append("    }").append("\n");
+
+						}
+						line = reader.readLine();
+					}
+					buffer.append("}");
+				}
+			}
+			FileWriter writer = new FileWriter(new File(filename));
+			writer.append(buffer.toString());
+			writer.flush();
+			writer.close();
+			reader.close();
+		} catch (IOException e) {
+			System.out.println("Error reading line ...");
+		}
 	}
 }

@@ -100,6 +100,7 @@ public class mainApp  {
 			device = AvailableProducts.get(index);
 
 			if(pieces>0){
+				// sell the product
 				index = AvailableProducts.indexOf(device);
 
 				System.out.print("\nThe product is available for sale. Do you want to buy it? Yes/No: ");
@@ -122,14 +123,15 @@ public class mainApp  {
 					Sales.add(toBeSold);
 
 					//reduce model pieces by one
-					Device dev = AvailableProducts.get(index);
-					dev.setPieces(dev.getPieces()-1);
+					device.setPieces(device.getPieces()-1);
+					ReadFileApp.updatePieces(device.getCode(),"products.txt");
+					AvailableProducts.set(index, device); // replace list item
 					System.out.println("Congratulations, the product has been sold!");
 				}
 			}
 
 		}else{
-			//you can order
+			// order the product
 			System.out.print("\nThe product is not available for sale. Do you want to order it? Yes/No: ");
 			answer = Device.checkInput("Yes","No",in.nextLine(),"preferred answer Yes or No");
 			if(answer.equalsIgnoreCase("Yes")){
